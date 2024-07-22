@@ -16,9 +16,7 @@
             "outputPath": "dist/zoneless-calculator",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": [],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -73,10 +71,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": [],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               {
@@ -92,5 +87,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
