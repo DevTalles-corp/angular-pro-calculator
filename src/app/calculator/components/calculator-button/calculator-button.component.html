@@ -1,5 +1,10 @@
 <!-- <div class="w-1/4 border-r border-b border-indigo-400"> -->
-<button [class.is-command]="isCommand()" (click)="handleClick()" #button>
+<button
+  [class.is-command]="isCommand()"
+  [class.is-pressed]="isPressed()"
+  (click)="handleClick()"
+  #button
+>
   <ng-content />
 </button>
 <!-- </div> -->
