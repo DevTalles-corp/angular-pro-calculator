@@ -3,10 +3,12 @@
   style="max-width: 300px"
 >
   <div class="w-full py-5 px-6 text-6xl text-white font-thin">
-    <span class="text-4xl"> 50 + </span>
+    @if( subResultText() !== '0' ) {
+    <span class="text-4xl"> {{ subResultText() }} {{ lastOperator() }} </span>
     <br />
+    }
 
-    <span>340.0</span>
+    <span>{{ resultText() }}</span>
   </div>
 </div>
 <div class="w-full bg-gradient-to-b from-indigo-400 to-indigo-500">
