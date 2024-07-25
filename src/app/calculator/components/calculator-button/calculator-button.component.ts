@@ -52,11 +52,15 @@ export class CalculatorButtonComponent {
   // }
 
   handleClick() {
+    // console.log('handleclick');
+
     if (!this.contentValue()?.nativeElement) {
       return;
     }
 
     const value = this.contentValue()!.nativeElement.innerText;
+
+    // console.log({ value });
 
     this.onClick.emit(value.trim());
   }
