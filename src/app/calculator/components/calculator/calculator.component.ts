@@ -1,5 +1,5 @@
 import {
-  ChangeDetectionStrategy,
+  // ChangeDetectionStrategy,
   Component,
   computed,
   inject,
@@ -9,13 +9,14 @@ import { CalculatorButtonComponent } from '../calculator-button/calculator-butto
 import { CalculatorService } from '@/calculator/services/calculator.service';
 
 @Component({
-    selector: 'calculator',
-    imports: [CalculatorButtonComponent],
-    templateUrl: './calculator.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    host: {
-        '(document:keyup)': 'handleKeyboardEvent($event)',
-    }
+  selector: 'calculator',
+  imports: [CalculatorButtonComponent],
+  templateUrl: './calculator.component.html',
+  // changeDetection: ChangeDetectionStrategy.OnPush,
+
+  host: {
+    '(document:keyup)': 'handleKeyboardEvent($event)',
+  },
 })
 export class CalculatorComponent {
   private calculatorService = inject(CalculatorService);
