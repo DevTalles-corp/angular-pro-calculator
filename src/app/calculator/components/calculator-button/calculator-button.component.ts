@@ -12,20 +12,18 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'calculator-button',
-  standalone: true,
-  imports: [],
-  templateUrl: './calculator-button.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrl: './calculator-button.component.css',
-  host: {
-    class: 'border-r border-b border-indigo-400',
-    '[class.w-2/4]': 'isDoubleSize()',
-    '[class.w-1/4]': '!isDoubleSize()',
-    // attribute: 'hola',
-    // 'data-size': 'XL',
-  },
-  // encapsulation: ViewEncapsulation.None,
+    selector: 'calculator-button',
+    imports: [],
+    templateUrl: './calculator-button.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrl: './calculator-button.component.css',
+    host: {
+        class: 'border-r border-b border-indigo-400',
+        '[class.w-2/4]': 'isDoubleSize()',
+        '[class.w-1/4]': '!isDoubleSize()',
+        // attribute: 'hola',
+        // 'data-size': 'XL',
+    }
 })
 export class CalculatorButtonComponent {
   public isPressed = signal(false);
