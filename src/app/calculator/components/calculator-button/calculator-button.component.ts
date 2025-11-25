@@ -13,7 +13,6 @@ import {
 
 @Component({
   selector: 'calculator-button',
-  imports: [],
   templateUrl: './calculator-button.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './calculator-button.component.css',
