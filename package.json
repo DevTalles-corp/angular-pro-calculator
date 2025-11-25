@@ -27,6 +27,7 @@
     "@angular/cli": "^21.0.0",
     "@angular/compiler-cli": "^21.0.0",
     "@types/jasmine": "~5.1.0",
+    "@vitest/coverage-v8": "^4.0.13",
     "autoprefixer": "^10.4.19",
     "jsdom": "^27.2.0",
     "postcss": "^8.4.39",
