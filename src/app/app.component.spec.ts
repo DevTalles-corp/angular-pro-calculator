@@ -57,6 +57,15 @@ describe('AppComponent', () => {
   });
 
   it('should render buy me a beer link', () => {
-    // Todo:
+    const fixture = TestBed.createComponent(AppComponent);
+    const compiled = fixture.nativeElement as HTMLElement;
+    const linkElement = compiled.querySelector('a');
+
+    expect(linkElement).toBeTruthy();
+    expect(linkElement?.getAttribute('title')).toBe('Buy me a beer');
+    expect(linkElement?.getAttribute('href')).toBe(
+      'https://www.buymeacoffee.com/scottwindon'
+    );
+    expect(linkElement?.getAttribute('target')).toBe('_blank');
   });
 });
