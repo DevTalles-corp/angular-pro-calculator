@@ -9,9 +9,12 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'zoneless-calculator';
-  subTitle = signal('Hola Mundo');
 
-  method1() {}
+  subTitle = 'Hola Mundo';
+
+  method1() {
+    console.log('Hola desde method1');
+  }
 
   private method2() {}
 }
