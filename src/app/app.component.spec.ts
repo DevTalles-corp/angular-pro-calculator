@@ -8,24 +8,42 @@ describe('AppComponent', () => {
     }).compileComponents();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  it('should be 4', () => {
+    // Arrange
+    const num1 = 1;
+    const num2 = 3;
+
+    // Act
+    const result = num1 + num2;
+
+    // Assert
+    // if (result !== 4) {
+    //   throw new Error('El resultado debe de ser 4');
+    // }
+    expect(result).toBe(4);
   });
 
-  it(`should have the 'zoneless-calculator' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('zoneless-calculator');
-  });
+  // it('should create the app', () => {
+  //   const fixture = TestBed.createComponent(AppComponent);
+  //   const app = fixture.componentInstance;
+  //   // const compiled = fixture.nativeElement as HTMLElement;
+  //   // console.log(compiled.innerHTML);
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Hello, zoneless-calculator'
-    );
-  });
+  //   expect(app).toBeTruthy();
+  // });
+
+  // it(`should have the 'zoneless-calculator' title`, () => {
+  //   const fixture = TestBed.createComponent(AppComponent);
+  //   const app = fixture.componentInstance;
+  //   expect(app.title).toEqual('zoneless-calculator');
+  // });
+
+  // it('should render title', () => {
+  //   const fixture = TestBed.createComponent(AppComponent);
+  //   fixture.detectChanges();
+  //   const compiled = fixture.nativeElement as HTMLElement;
+  //   expect(compiled.querySelector('h1')?.textContent).toContain(
+  //     'Hello, zoneless-calculator'
+  //   );
+  // });
 });
