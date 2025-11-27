@@ -14,66 +14,155 @@ describe('CalculatorService', () => {
   });
 
   it('should be created with default values', () => {
-    // todo:
+    expect(service.resultText()).toBe('0');
+    expect(service.subResultText()).toBe('0');
+    expect(service.lastOperator()).toBe('+');
   });
 
   it('should set resultText, subResultText to "0" when C is pressed', () => {
-    // todo:
+    service.resultText.set('123');
+    service.subResultText.set('456');
+    service.lastOperator.set('-');
+
+    service.constructNumber('C');
+
+    expect(service.resultText()).toBe('0');
+    expect(service.subResultText()).toBe('0');
+    expect(service.lastOperator()).toBe('+');
   });
 
   it('should update resultText with number input', () => {
-    // todo:
+    service.constructNumber('1');
+    service.constructNumber('2');
+    service.constructNumber('3');
+
+    expect(service.resultText()).toBe('123');
   });
 
   it('should handle operators correctly', () => {
-    // todo:
+    service.resultText.set('12345');
+    service.constructNumber('-');
+
+    expect(service.resultText()).toBe('0');
+    expect(service.lastOperator()).toBe('-');
+
+    service.resultText.set('12');
+    service.constructNumber('*');
+
+    expect(service.resultText()).toBe('0');
+    expect(service.lastOperator()).toBe('*');
+  });
+
+  it('should handle operators correctly', () => {
+    const operators = ['+', '-', '*', '/', '÷'];
+
+    operators.forEach((operator) => {
+      service.resultText.set('123');
+      service.constructNumber(operator);
+
+      expect(service.resultText()).toBe('0');
+      expect(service.lastOperator()).toBe(operator);
+    });
   });
 
   it('should calculate result correctly for addition', () => {
-    // todo:
+    service.constructNumber('1');
+    service.constructNumber('+');
+    service.constructNumber('2');
+    service.constructNumber('=');
+
+    expect(service.resultText()).toBe('3');
   });
 
   it('should calculate result correctly for subtraction', () => {
-    // todo:
+    service.constructNumber('5');
+    service.constructNumber('-');
+    service.constructNumber('3');
+    service.constructNumber('=');
+
+    expect(service.resultText()).toBe('2');
   });
 
   it('should calculate result correctly for multiplication', () => {
-    // todo:
+    service.constructNumber('2');
+    service.constructNumber('*');
+    service.constructNumber('2');
+    service.constructNumber('=');
+
+    expect(service.resultText()).toBe('4');
   });
 
   it('should calculate result correctly for division', () => {
-    // todo:
+    service.constructNumber('1');
+    service.constructNumber('0');
+    service.constructNumber('/');
+    service.constructNumber('2');
+    service.constructNumber('=');
+
+    expect(service.resultText()).toBe('5');
   });
 
   it('should handle decimal point correctly', () => {
-    // todo:
+    service.constructNumber('1');
+    service.constructNumber('2');
+    service.constructNumber('.');
+    service.constructNumber('.');
+    service.constructNumber('5');
+
+    expect(service.resultText()).toBe('12.5');
+    service.constructNumber('.');
+    expect(service.resultText()).toBe('12.5');
   });
 
   it('should handle decimal point starting with 0', () => {
-    // todo:
+    service.constructNumber('.');
+    service.constructNumber('.');
+
+    expect(service.resultText()).toBe('0.');
   });
 
   it('should handle sign change +/-', () => {
-    // todo:
+    service.resultText.set('15');
+    service.constructNumber('+/-');
+
+    expect(service.resultText()).toBe('-15');
+
+    service.constructNumber('+/-');
+    expect(service.resultText()).toBe('15');
   });
 
   it('should handle backspace', () => {
-    // todo:
+    service.constructNumber('1');
+    service.constructNumber('2');
+    service.constructNumber('Backspace');
+
+    expect(service.resultText()).toBe('1');
+
+    service.constructNumber('Backspace');
+    expect(service.resultText()).toBe('0');
   });
 
   it('should handle backspace with negative numbers', () => {
-    // todo:
+    service.resultText.set('-15');
+
+    service.constructNumber('Backspace');
+    expect(service.resultText()).toBe('-1');
+
+    service.constructNumber('Backspace');
+    expect(service.resultText()).toBe('0');
   });
 
   it('should handle max length', () => {
-    // todo:
+    for (let i = 0; i < 20; i++) {
+      service.constructNumber('1');
+    }
+
+    expect(service.resultText().length).toBe(10);
+    expect(service.resultText()).toBe('1111111111');
   });
 
   it('should handle invalid input', () => {
-    // todo:
-  });
-
-  it('should handle negative zero input correctly', () => {
-    // todo:
+    service.resultText.set('15');
+    service.constructNumber('ABC');
   });
 });
