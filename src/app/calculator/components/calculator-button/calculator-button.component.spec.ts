@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CalculatorButtonComponent } from './calculator-button.component';
+import { vi } from 'vitest';
 
 describe('CalculatorButtonComponent', () => {
   let component: CalculatorButtonComponent;
@@ -47,15 +48,48 @@ describe('CalculatorButtonComponent', () => {
   });
 
   it('should emit onClick when handleClick is called', () => {
-    // todo:
+    const spy = vi.spyOn(component.onClick, 'emit');
+
+    const buttonElement = (fixture.nativeElement as HTMLElement).querySelector(
+      'button'
+    );
+
+    buttonElement!.innerText = ' 9 ';
+
+    buttonElement!.click();
+
+    expect(buttonElement).toBeTruthy();
+    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledWith('9');
   });
 
-  it('should set isPressed to true and then false when keyboardPressedStyle is called with matching key', (done) => {
-    // todo:
+  it('should set isPressed to true and then false when keyboardPressedStyle is called with matching key', async () => {
+    // const buttonElement = (fixture.nativeElement as HTMLElement).querySelector(
+    //   'button'
+    // );
+    // buttonElement!.innerText = '9';
+    component.contentValue()!.nativeElement.innerText = '9';
+
+    component.keyboardPressedStyle('9');
+
+    expect(component.isPressed()).toBe(true);
+
+    await new Promise((resolve) => setTimeout(resolve, 101));
+
+    // expect(false).toBe(true);
+    expect(component.isPressed()).toBe(false);
+
+    // setTimeout(() => {
+    // expect(false).toBe(true);
+    //   done();
+    // }, 101);
   });
 
   it('should NOT set isPressed if key does not match', () => {
-    // todo:
+    component.contentValue()!.nativeElement.innerText = '9';
+    component.keyboardPressedStyle('8');
+
+    expect(component.isPressed()).toBe(false);
   });
 
   it('should display projected content', () => {
