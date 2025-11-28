@@ -4,6 +4,8 @@ import { vi } from 'vitest';
 
 import { CalculatorComponent } from './calculator.component';
 import { CalculatorService } from '@/calculator/services/calculator.service';
+import { By } from '@angular/platform-browser';
+import { CalculatorButtonComponent } from '../calculator-button/calculator-button.component';
 
 class MockCalculatorService {
   resultText = signal('100');
@@ -69,30 +71,62 @@ describe('CalculatorComponent', () => {
   });
 
   it('should call constructNumber when handleClick is called', () => {
-    // todo:
+    component.handleClick('5');
+    expect(mockCalculatorService.constructNumber).toHaveBeenCalled();
+    expect(mockCalculatorService.constructNumber).toHaveBeenCalledWith('5');
   });
 
   it('should handle keyboard events correctly', () => {
-    // todo:
+    const event = new KeyboardEvent('keyup', { key: '1' });
+    document.dispatchEvent(event);
+
+    expect(mockCalculatorService.constructNumber).toHaveBeenCalledWith('1');
   });
 
   it('should handle special keyboard events (Enter -> =)', () => {
-    // todo:
+    const event = new KeyboardEvent('keyup', { key: 'Enter' });
+    document.dispatchEvent(event);
+
+    expect(mockCalculatorService.constructNumber).toHaveBeenCalledWith('=');
   });
 
   it('should handle special keyboard events (Escape -> C)', () => {
-    // todo:
+    const event = new KeyboardEvent('keyup', { key: 'Escape' });
+    document.dispatchEvent(event);
+
+    expect(mockCalculatorService.constructNumber).toHaveBeenCalledWith('C');
   });
 
-  it('should call keyboardPressedStyle on all buttons when key is pressed', () => {
+  it('should call constructNumber when button is clicked', () => {
     // todo:
+    const buttons = fixture.debugElement.queryAll(
+      By.directive(CalculatorButtonComponent)
+    );
+
+    const button = buttons[0];
+    button.triggerEventHandler('onClick', 'C');
+
+    expect(buttons.length).toBe(19);
+    expect(mockCalculatorService.constructNumber).toHaveBeenCalledWith('C');
   });
 
   it('should update resultText signal when service updates', () => {
-    // todo:
+    mockCalculatorService.resultText.set('999');
+    fixture.detectChanges();
+
+    expect(component.resultText()).toBe('999');
   });
 
   it('should have 19 calculator-button components with content projected', () => {
-    // todo:
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    const buttons = compiled.querySelectorAll('calculator-button');
+
+    expect(buttons.length).toBe(19);
+
+    expect(buttons[0].querySelector('button')?.innerHTML).toContain('C');
+    expect(buttons[1].querySelector('button')?.innerHTML).toContain('+/-');
+    expect(buttons[2].querySelector('button')?.innerHTML).toContain('%');
+    expect(buttons[3].querySelector('button')?.innerHTML).toContain('÷');
   });
 });
