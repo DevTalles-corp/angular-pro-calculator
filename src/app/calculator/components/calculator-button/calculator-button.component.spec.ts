@@ -1,6 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CalculatorButtonComponent } from './calculator-button.component';
 import { vi } from 'vitest';
+import { Component } from '@angular/core';
+
+@Component({
+  imports: [CalculatorButtonComponent],
+  template: `
+    <calculator-button>
+      <span class="projected-content"> 7 </span>
+    </calculator-button>
+  `,
+})
+class TestHostComponent {}
 
 describe('CalculatorButtonComponent', () => {
   let component: CalculatorButtonComponent;
@@ -93,6 +104,12 @@ describe('CalculatorButtonComponent', () => {
   });
 
   it('should display projected content', () => {
-    // todo:
+    const fixtureHost = TestBed.createComponent(TestHostComponent);
+    fixtureHost.detectChanges();
+
+    const compiled = fixtureHost.nativeElement as HTMLElement;
+
+    expect(compiled.querySelector('.projected-content')).toBeTruthy();
+    expect(compiled.textContent.trim()).toBe('7');
   });
 });
